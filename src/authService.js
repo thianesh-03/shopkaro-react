@@ -1,51 +1,61 @@
-// src/authService.js
-import { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
-const AuthContext = createContext();
+const apiUrl = 'http://localhost:3001'; 
+const tokenKey = 'authToken';
 
-export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const login = async (credentials) => {
+const authService = {
+  async register(user) {
     try {
-      const response = await axios.post('http://localhost:3000/api/login', credentials);
+      const response = await axios.post(`${apiUrl}/register`, user);
+      return response.data;
+    } catch (error) {
+      console.error('Registration error:', error);
+      throw error;
+    }
+  },
+
+  async login(credentials) {
+    try {
+      const response = await axios.post(`${apiUrl}/login`, credentials);
       if (response.data.token) {
-        localStorage.setItem('authToken', response.data.token);
-        setIsAuthenticated(true);
+        this.setToken(response.data.token);
       }
+      return response.data;
     } catch (error) {
-      console.error('Error logging in:', error);
+      console.error('Login error:', error);
+      throw error;
     }
-  };
+  },
 
-  const register = async (user) => {
+  logout() {
+    this.clearToken();
+  },
+
+  isAuthenticated() {
+    return !!this.getToken();
+  },
+
+  getToken() {
+    return localStorage.getItem(tokenKey);
+  },
+
+  setToken(token) {
+    localStorage.setItem(tokenKey, token);
+  },
+
+  clearToken() {
+    localStorage.removeItem(tokenKey);
+  },
+
+  async getProducts() {
     try {
-      await axios.post('http://localhost:3000/api/register', user);
+      const response = await axios.get('https://fakestoreapi.com/products');
+      return response.data;
     } catch (error) {
-      console.error('Error registering:', error);
+      console.error('Error fetching products:', error);
+      throw error;
     }
-  };
-
-  const logout = () => {
-    localStorage.removeItem('authToken');
-    setIsAuthenticated(false);
-  };
-
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      setIsAuthenticated(true);
-    }
-  }, []);
-
-  return (
-    <AuthContext.Provider value={{ isAuthenticated, login, register, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    },
 };
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export default authService;

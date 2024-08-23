@@ -6,13 +6,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3001;
 
 app.use(bodyParser.json());
 app.use(cors());
 
 mongoose
-  .connect('mongodb://127.0.0.1:27017/auth-db', { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect('mongodb://127.0.0.1:27017/auth-db')
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
@@ -26,17 +26,17 @@ const User = mongoose.model('User', UserSchema);
 
 // Product Schema
 const ProductSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  category: { type: String, required: true },
-  description: { type: [String], required: true },
-  price: { type: Number, required: true },
-  images: { type: [String], required: true }
+  title: String,
+  price: Number,
+  description: String,
+  category: String,
+  image: String
 });
 
 const Product = mongoose.model('Product', ProductSchema);
 
 // Register route
-app.post('/api/register', async (req, res) => {
+app.post('/register', async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -56,8 +56,12 @@ app.post('/api/register', async (req, res) => {
 });
 
 // Login route
-app.post('/api/login', async (req, res) => {
+app.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).send('Missing email or password');
+  }
 
   try {
     const user = await User.findOne({ email });
@@ -68,12 +72,13 @@ app.post('/api/login', async (req, res) => {
       res.status(400).send('Invalid credentials');
     }
   } catch (err) {
+    console.error(err);
     res.status(500).send('Server error');
   }
 });
 
 // Profile route
-app.get('/api/profile', async (req, res) => {
+app.get('/profile', async (req, res) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {
     const token = authHeader.split(' ')[1];
@@ -94,14 +99,10 @@ app.get('/api/profile', async (req, res) => {
 });
 
 // Products route
-app.get('/api/products', async (req, res) => {
+app.get('/products', async (req, res) => {
   try {
     const products = await Product.find({});
-    const normalizedProducts = products.map(product => ({
-      ...product._doc,
-      description: Array.isArray(product.description) ? product.description : [product.description]
-    }));
-    res.json(normalizedProducts);
+    res.json(products);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });

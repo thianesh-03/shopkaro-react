@@ -1,65 +1,72 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useAuth } from '../authService'; // Ensure this path is correct
-import { Button, TextField, Typography, Container } from '@mui/material';
+import React, { useState } from 'react';
+import authService from '../authService';
+import './Signup.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const Signup = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const { signUp } = useAuth(); // Destructure the signUp function from useAuth
-  const [error, setError] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const navigate=useNavigate();
 
-  const onSubmit = async (data) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      setSnackbarMessage('Passwords do not match');
+      setSnackbarOpen(true);
+      return;
+    }
     try {
-      await signUp(data.email, data.password);
-      // Handle successful signup, e.g., redirect to login page
-    } catch (err) {
-      setError('Signup failed. Please try again.');
+      await authService.register({ email, password });
+      setSnackbarMessage('Registration successful');
+      setSnackbarOpen(true);
+    } catch (error) {
+      setSnackbarMessage('Registration failed');
+      setSnackbarOpen(true);
+      navigate('/login')
     }
   };
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
   return (
-    <Container>
-      <Typography variant="h4">Sign Up</Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <TextField
-            label="Email"
-            {...register('email', { required: 'Email is required' })}
-            error={!!errors.email}
-            helperText={errors.email?.message}
-            fullWidth
-            margin="normal"
-          />
-        </div>
-        <div>
-          <TextField
-            label="Password"
-            type="password"
-            {...register('password', { required: 'Password is required' })}
-            error={!!errors.password}
-            helperText={errors.password?.message}
-            fullWidth
-            margin="normal"
-          />
-        </div>
-        <div>
-          <TextField
-            label="Confirm Password"
-            type="password"
-            {...register('confirmPassword', {
-              required: 'Confirm Password is required',
-              validate: value => value === watch('password') || 'Passwords do not match'
-            })}
-            error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword?.message}
-            fullWidth
-            margin="normal"
-          />
-        </div>
-        {error && <Typography color="error">{error}</Typography>}
-        <Button type="submit" variant="contained" color="primary">Sign Up</Button>
+    <div className="signup-container">
+      <form onSubmit={handleSubmit}>
+        <h2><i>Sign Up</i></h2>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Sign Up</button>
       </form>
-    </Container>
+      {snackbarOpen && (
+        <div className="snackbar" onAnimationEnd={handleSnackbarClose}>
+          {snackbarMessage}
+        </div>
+      )}
+    </div>
   );
 };
 
