@@ -30,7 +30,7 @@ const AddCard = () => {
         <img src={product.image} alt={product.title} />
       </div>
       <div className="add-card-content">
-        <h2>{product.title}</h2>
+        <h3 id="prod-title">{product.title}</h3>
         <p>{product.description}</p>
         <h5>Price: <span className="price">{formatCurrency(product.price*75* quantity) }</span></h5>
         <div className="quantity-selector">

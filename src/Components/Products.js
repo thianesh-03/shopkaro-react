@@ -75,7 +75,7 @@ const Products = () => {
         {filteredProducts.length > 0 ? (
           filteredProducts.map(product => (
             <div key={product.id} className="product-card">
-              <h3>{product.title}</h3>
+              <h3 id='prod-title'>{product.title}</h3>
               <img 
                 src={product.image} 
                 alt={product.title} 
@@ -85,7 +85,6 @@ const Products = () => {
               <p>Price: {formatCurrency(product.price*75)}</p>
               <p>Category: {product.category}</p>
               <p>Rating: {product.rating.rate}</p>
-              <p>Brand: {product.brand}</p>
               <button onClick={() => handleNavigateToAddCard(product)}>Add to Cart</button>
             </div>
           ))

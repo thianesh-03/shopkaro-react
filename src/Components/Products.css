@@ -60,6 +60,10 @@ body, html {
     font-size: 0.9rem;
     color: #666;
   }
+
+  #prod-title{
+    color: rgb(0, 0, 0);
+  }
   
   .product-card button {
     display: block;
@@ -75,7 +79,7 @@ body, html {
   }
   
   .product-card button:hover {
-    background: #ff3366;
+    background: linear-gradient(to right, #ff9933, #ff3366);
   }
   
   @media (max-width: 768px) {
