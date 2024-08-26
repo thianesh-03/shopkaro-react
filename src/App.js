@@ -7,6 +7,7 @@ import ProtectedRoute from "./ProtectedRoute"
 import Products from "./Components/Products";
 import Signup from "./Components/Signup";
 import Header from "./Components/Header";
+import AddCard from "./Components/AddCart";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/cart" element={<AddCard />} />
           <Route path="/payment" element={<Payment />} />
         </Routes>
       </>

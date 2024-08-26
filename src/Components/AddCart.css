@@ -1,0 +1,130 @@
+/* AddCard.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.add-card-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.add-card-image img {
+    max-width: 300px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.add-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.add-card-content h2 {
+    color: #333; /* Ensure this color contrasts well with the background */
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.add-card-content p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.add-card-content h5 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.add-card-content .price {
+    font-weight: bold;
+    color: #ff3366;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.quantity-selector button {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #ff9933;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-selector button:hover {
+    background-color: #ff3366;
+}
+
+.quantity-selector span {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.cta-btn {
+    padding: 15px;
+    background-color: #ff9933;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: #ff3366;
+}
+
+@media (max-width: 768px) {
+    .add-card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-card-image img {
+        max-width: 100%;
+    }
+
+    .add-card-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .add-card-content p {
+        font-size: 0.9rem;
+    }
+
+    .add-card-content h5 {
+        font-size: 1.1rem;
+    }
+
+    .quantity-selector button {
+        font-size: 0.9rem;
+    }
+
+    .cta-btn {
+        font-size: 1rem;
+    }
+}

@@ -7,6 +7,7 @@ import UserProfile from './components/UserProfile';
 import Products from './components/Products';
 import Payment from './components/Payment';
 import PrivateRoute from './components/PrivateRoute'; // Custom private route component if needed
+import AddCard from '../Components/AddCart';
 
 function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ function AppRoutes() {
             </PrivateRoute>
           } 
         />
+        <Route path="/cart" element={<AddCard />} />
         <Route path="/payment" element={<Payment />} />
       </Routes>
     </Router>

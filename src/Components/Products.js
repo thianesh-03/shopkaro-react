@@ -57,7 +57,7 @@ const Products = () => {
   };
 
   const handleNavigateToAddCard = (product) => {
-    navigate('/Payment', { state: { product } });
+    navigate('/cart', { state: { product } });
   };
   function formatCurrency(value) {
     return new Intl.NumberFormat('en-IN', {

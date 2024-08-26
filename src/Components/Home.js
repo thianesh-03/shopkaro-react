@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Home.css';
 
 function Home() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function Home() {
     <main>
       <section className="hero">
         <div className="hero-content">
-          <h1>Online</h1>
+          <h1 id="txt1">Online</h1>
           <h1 id="txt2">Shopping</h1>
           <p>
             Discover a seamless and smarter shopping experience with ShopEase. 
@@ -23,14 +24,6 @@ function Home() {
             today and transform the way you shop!
           </p>
           <button className="cta-btn" onClick={onClick}>GET STARTED</button>
-        </div>
-        <div className="hero-image">
-          <img 
-            src="https://i.pinimg.com/originals/dc/ae/66/dcae66764a7bd4d470bd2446f062b1ff.png" 
-            alt="Online Shopping Illustration" 
-            height="75%" 
-            width="75%"
-          />
         </div>
       </section>
 

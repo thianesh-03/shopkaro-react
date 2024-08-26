@@ -1,0 +1,107 @@
+/* Home.css */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #9933ff9f, #3366ff9d);
+  color: #ffffff;
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 5%;
+}
+
+.hero-content {
+  max-width: 800px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3.5rem;
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#txt1 {
+  color: #ffffff;
+}
+
+#txt2 {
+  background: linear-gradient(to right, #ff9933, #ff3366);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+  max-height: 40vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+p::-webkit-scrollbar {
+  width: 8px;
+}
+
+p::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.cta-btn {
+  background: linear-gradient(to right, #ff9933, #ff3366);
+  border: none;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(255, 153, 51, 0.3);
+}
+
+footer {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    max-height: 30vh;
+  }
+
+  .cta-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
