@@ -6,6 +6,11 @@ body, html {
     background-color: #f4f4f4;
 }
 
+body {
+    background: #868686 ;
+    color: #ffffff;
+  }
+
 .add-card-container {
     max-width: 800px;
     margin: 50px auto;

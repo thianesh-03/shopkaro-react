@@ -17,6 +17,11 @@
     margin-bottom: 20px;
 }
 
+input::placeholder {
+    color: rgba(255, 0, 0, 0.7);
+}
+
+
 /* Amount to Pay */
 .payment-page-amount {
     font-size: 1.5em;
@@ -35,8 +40,8 @@
 .payment-page-method {
     display: flex;
     align-items: center;
-    background-color: #e0e0e0; /* Use a non-white color */
-    padding: 10px;
+    background-color: #f4f4f4; /* Use a non-white color */
+    padding: 0px;
     border-radius: 4px;
 }
 
@@ -59,7 +64,7 @@
     font-size: 1em;
     border: 1px solid #dcdcdc;
     border-radius: 4px;
-    background-color: #f9f9f9; /* Light grey background */
+    background-color: #e0e0e0; /* Light grey background */
     color: #232F3E;
 }
 
@@ -73,7 +78,7 @@
     font-size: 1em;
     border: 1px solid #dcdcdc;
     border-radius: 4px;
-    background-color: #f9f9f9; /* Light grey background */
+    background-color: #e0e0e0; /* Light grey background */
     color: #232F3E;
 }
 
